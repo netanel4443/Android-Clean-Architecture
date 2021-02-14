@@ -40,6 +40,7 @@ class MainActivity : BaseActivity() {
         initEffectObserver()
 
         viewModel.getPhotos()
+        viewModel.uploadPhoto()
     }
 
     private fun initEffectObserver() {
@@ -64,9 +65,4 @@ class MainActivity : BaseActivity() {
         recyclerView.setHasFixedSize(true)
     }
 
-//todo check if parent class onDestroyed is called
-
-//    override fun onDestroy() {
-//        super.onDestroy()
-//    }
 }

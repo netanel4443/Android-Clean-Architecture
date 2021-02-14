@@ -3,6 +3,7 @@ package com.e.androidcleanarchitecture.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.e.androidcleanarchitecture.api.PhotosApi
+import com.e.androidcleanarchitecture.data.PhotoData
 import com.e.androidcleanarchitecture.di.scopes.ActivityScope
 import com.e.androidcleanarchitecture.utils.SingleLiveEvent
 import com.e.androidcleanarchitecture.utils.livedata.MviMutableLiveData
@@ -46,6 +47,22 @@ class MainViewModel @Inject constructor(
                 },{
                     //handle failure
                     println(it.message)
+                })
+    }
+
+    fun uploadPhoto(){
+        val photo=PhotoData(5001,5001,"title","url","thumbUrl")
+        photosApi.postPhoto(photo)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({response->
+                    if (response.isSuccessful){
+                        val body=response.body()
+                        println(body)
+                    }
+
+                },{
+
                 })
     }
 
